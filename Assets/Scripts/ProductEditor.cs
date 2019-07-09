@@ -6,10 +6,10 @@ using System.Text;
 using System.Xml;
 using TMPro;
 
-public class UnosElements : MonoBehaviour
+public class ProductEditor : MonoBehaviour
 {
-    public XmlDocument xmlDoc;
-    public GameObject proizvodButton;
+    private XmlDocument xmlDoc;
+    public GameObject productButton;
     public GameObject containerButtons;
 
     private void OnEnable()
@@ -21,24 +21,27 @@ public class UnosElements : MonoBehaviour
 #if UNITY_ANDROID
         xmlDoc.Load(Application.persistentDataPath + "/Proizvodi.xml");
 #endif
-        proizvodLister(xmlDoc);
+        productLister(xmlDoc);
 
     }
     private void OnDisable()
     {
         foreach (Transform child in containerButtons.transform)
         {
-            GameObject.Destroy(child.gameObject);
+            if(child.tag == "ButtonEdit")
+            {
+                GameObject.Destroy(child.gameObject);
+            }
         }
-    } 
+    }
 
-    private void proizvodLister(XmlDocument xmlDoc)
+    private void productLister(XmlDocument xmlDoc)
     {
         foreach(XmlElement proizvod in xmlDoc.DocumentElement)
         {
-            GameObject butt = Instantiate(proizvodButton, containerButtons.transform) as GameObject;
+            GameObject butt = Instantiate(productButton, containerButtons.transform) as GameObject;
             butt.GetComponentInChildren<TextMeshProUGUI>().SetText(proizvod.GetAttribute("Ime"));
-            butt.GetComponent<ButtonUnoos>().proizvodName = proizvod.GetAttribute("Ime");
+            butt.GetComponent<ButtonPress>().productName = proizvod.GetAttribute("Ime");
         }
         
      }

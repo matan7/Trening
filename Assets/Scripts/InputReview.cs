@@ -6,7 +6,7 @@ using System.Text;
 using TMPro;
 using System;
 
-public class PregledUnosa : MonoBehaviour
+public class InputReview : MonoBehaviour
 {
     public GameObject line;
     public GameObject dateTxt;

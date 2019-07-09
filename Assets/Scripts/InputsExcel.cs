@@ -7,9 +7,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UnosiExcel : MonoBehaviour
+public class InputsExcel : MonoBehaviour
 {
-    public string IdProizvoda { get; set; }
+    public string IdProduct { get; set; }
     public GameObject canvas;
 
     public TMP_InputField inputNr;
@@ -22,8 +22,8 @@ public class UnosiExcel : MonoBehaviour
     public GameObject buttonDel;
 
     public GameObject textDate;
-    public GameObject textTrenutno;
-    public GameObject textVlastito;
+    public GameObject textCurrentTime;
+    public GameObject textUserInputTime;
     public GameObject inputDate;
 
     public GameObject toggle1;
@@ -31,9 +31,8 @@ public class UnosiExcel : MonoBehaviour
 
     private string currentTime;
     private string selectedTime;
-    private string nameProizvod;
+    private string nameProduct;
     private string xmlPath;
-    public TextAsset pekaraDoc;
     private XmlDocument xmlDoc;
     void Start()
     {
@@ -54,9 +53,9 @@ public class UnosiExcel : MonoBehaviour
 
         foreach(XmlElement elem in xmlDoc.DocumentElement)
         {
-            if(elem.GetAttribute("id") == IdProizvoda)
+            if(elem.GetAttribute("id") == IdProduct)
             {
-                nameProizvod = elem.GetAttribute("Ime");   // nesta brljavi ovdje
+                nameProduct = elem.GetAttribute("Ime");   
                 break;    
             }
         }
@@ -112,15 +111,15 @@ public class UnosiExcel : MonoBehaviour
         if (toggle1.GetComponent<Toggle>().isOn)
         {
             textDate.GetComponent<TextMeshProUGUI>().color = Color.white;
-            textTrenutno.GetComponent<TextMeshProUGUI>().color = Color.white;
-            textVlastito.GetComponent<TextMeshProUGUI>().color = Color.gray;
+            textCurrentTime.GetComponent<TextMeshProUGUI>().color = Color.white;
+            textUserInputTime.GetComponent<TextMeshProUGUI>().color = Color.gray;
             inputDate.SetActive(false);
         }
         else
         {
             textDate.GetComponent<TextMeshProUGUI>().color = Color.gray;
-            textTrenutno.GetComponent<TextMeshProUGUI>().color = Color.gray;
-            textVlastito.GetComponent<TextMeshProUGUI>().color = Color.white;
+            textCurrentTime.GetComponent<TextMeshProUGUI>().color = Color.gray;
+            textUserInputTime.GetComponent<TextMeshProUGUI>().color = Color.white;
             inputDate.SetActive(true);
         }
     }
@@ -208,7 +207,7 @@ public class UnosiExcel : MonoBehaviour
         pekaraDocPath = Application.persistentDataPath + "/Pekara.csv";
 #endif
 
-        string saveDoc = Environment.NewLine + DateTime.Today.ToShortDateString() + "," + time + "," + nameProizvod + "," + amout ;
+        string saveDoc = Environment.NewLine + DateTime.Today.ToShortDateString() + "," + time + "," + nameProduct + "," + amout ;
         File.AppendAllText(pekaraDocPath, saveDoc);
         
     }

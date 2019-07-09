@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.IO;
 using System.Xml;
-using System;
-using UnityEngine;
-using System.IO;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine;
 
-public class DodajProizvod : MonoBehaviour
+public class AddProduct : MonoBehaviour
 {
     public GameObject inputName;
     public GameObject inputPrice;
@@ -16,9 +12,9 @@ public class DodajProizvod : MonoBehaviour
     private GameObject canvas;
     private XmlDocument xmlDoc;
     private string xmlPath;
-    private string imeProizvoda;
-    private string tezinaString;
-    private string cijenaString;
+    private string productName;
+    private string weightString;
+    private string priceString;
 
 
     // Start is called before the first frame update
@@ -53,19 +49,19 @@ public class DodajProizvod : MonoBehaviour
         inputWeight.GetComponent<TMP_InputField>().text = "";
         errorReport.SetActive(false);
     }
-    public void DodajNoviProizvod()
+    public void AddNewProduct()
     {
         if (inputName.GetComponent<TMP_InputField>().text != "" && inputPrice.GetComponent<TMP_InputField>().text != "" && inputWeight.GetComponent<TMP_InputField>().text != "")
         {
-            imeProizvoda = inputName.GetComponent<TMP_InputField>().text;
-            cijenaString = priceConverter(inputPrice.GetComponent<TMP_InputField>().text);
-            tezinaString = inputWeight.GetComponent<TMP_InputField>().text;
+            productName = inputName.GetComponent<TMP_InputField>().text;
+            priceString = PriceConverter(inputPrice.GetComponent<TMP_InputField>().text);
+            weightString = inputWeight.GetComponent<TMP_InputField>().text;
             XmlElement elem = xmlDoc.CreateElement("Proizvod");
             xmlDoc.DocumentElement.AppendChild(elem);
-            elem.SetAttribute("id", imeProizvoda.Replace(" ", string.Empty));
-            elem.SetAttribute("Ime", imeProizvoda);
-            elem.SetAttribute("Cijena", cijenaString);
-            elem.SetAttribute("Tezina", tezinaString + "g");
+            elem.SetAttribute("id", productName.Replace(" ", string.Empty));
+            elem.SetAttribute("Ime", productName);
+            elem.SetAttribute("Cijena", priceString);
+            elem.SetAttribute("Tezina", weightString + "g");
 #if UNITY_STANDALONE
             xmlDoc.Save(Application.dataPath + "/StreamingAssets/Proizvodi.xml");
 #endif
@@ -82,7 +78,7 @@ public class DodajProizvod : MonoBehaviour
         }
     }
    
-    private string priceConverter(string price)
+    private string PriceConverter(string price)
     {
         string[] stringArr = new string[2];
         if (price.Contains("."))

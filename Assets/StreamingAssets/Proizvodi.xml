@@ -7,5 +7,6 @@
   
 ]>
 <Proizvodi id="Proizvodi">
-  <Proizvod id="Kifla" Ime="Kifla" Cijena="2.00" Tezina="100g" />
+  <Proizvod id="Kifla" Ime="Kifla" Cijena="3.00" Tezina="100g" />
+  <Proizvod id="Burek" Ime="Burek" Cijena="10.00" Tezina="500g" />
 </Proizvodi>

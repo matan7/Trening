@@ -7,24 +7,24 @@ using System.IO;
 public class Navigation : MonoBehaviour
 {
     public GameObject mainMenu;
-    public GameObject administracija;
-    public GameObject proizvodi;
-    public GameObject unosi;
-    public GameObject proizvodEdit;
-    public GameObject dodajProizvod;
-    public GameObject unosExcel;
-    public GameObject pregledUnosa;
+    public GameObject administration;
+    public GameObject products;
+    public GameObject inputs;
+    public GameObject productEdit;
+    public GameObject addProduct;
+    public GameObject inputExcel;
+    public GameObject inputReview;
 
     private GameObject curentWindow;
 
     public bool mainMenuIsActive { get; set; }
-    public bool administracijaIsActive { get; set; }
-    public bool proizvodiIsActive { get; set; }
-    public bool unosiIsActive { get; set; }
-    public bool proizvodEditIsActive { get; set; }
-    public bool dodajProizvodIsActive { get; set; }
-    public bool unosExcelIsActive { get; set; }
-    public bool pregledUnosaIsActive { get; set; }
+    public bool administrationIsActive { get; set; }
+    public bool productsIsActive { get; set; }
+    public bool inputsIsActive { get; set; }
+    public bool productEditIsActive { get; set; }
+    public bool addProductIsActive { get; set; }
+    public bool inputExcelIsActive { get; set; }
+    public bool inputReviewIsActive { get; set; }
     
     public bool windowCanged { get; set; }
 
@@ -35,32 +35,31 @@ public class Navigation : MonoBehaviour
     void Start()
     {
         windowCanged = false;
+
 #if UNITY_ANDROID
         Screen.fullScreen = !Screen.fullScreen;
         Debug.Log("1 XML exist:" + File.Exists(Application.persistentDataPath + "/Proizvodi.xml"));
         Debug.Log(Application.dataPath);
 #endif
-
-
         setAllFalse();
 
         windowsStatus.Add(mainMenuIsActive);
-        windowsStatus.Add(administracijaIsActive);
-        windowsStatus.Add(proizvodiIsActive);
-        windowsStatus.Add(unosiIsActive);
-        windowsStatus.Add(proizvodEditIsActive);
-        windowsStatus.Add(dodajProizvodIsActive);
-        windowsStatus.Add(unosExcelIsActive);
-        windowsStatus.Add(pregledUnosaIsActive);
+        windowsStatus.Add(administrationIsActive);
+        windowsStatus.Add(productsIsActive);
+        windowsStatus.Add(inputsIsActive);
+        windowsStatus.Add(productEditIsActive);
+        windowsStatus.Add(addProductIsActive);
+        windowsStatus.Add(inputExcelIsActive);
+        windowsStatus.Add(inputReviewIsActive);
 
         windowList.Add(mainMenu);
-        windowList.Add(administracija);
-        windowList.Add(proizvodi);
-        windowList.Add(unosi);
-        windowList.Add(proizvodEdit);
-        windowList.Add(dodajProizvod);
-        windowList.Add(unosExcel);
-        windowList.Add(pregledUnosa);
+        windowList.Add(administration);
+        windowList.Add(products);
+        windowList.Add(inputs);
+        windowList.Add(productEdit);
+        windowList.Add(addProduct);
+        windowList.Add(inputExcel);
+        windowList.Add(inputReview);
 
         curentWindow = mainMenu;
         
@@ -101,74 +100,75 @@ public class Navigation : MonoBehaviour
             {
                 mainMenu.SetActive(false);
             }
-            if (administracijaIsActive && !administracija.active)
+            if (administrationIsActive && !administration.active)
             {
-                administracija.SetActive(true);
-                curentWindow = administracija;
+                administration.SetActive(true);
+                curentWindow = administration;
             }
             else
             {
-                administracija.SetActive(false);
+                administration.SetActive(false);
             }
-            if (proizvodiIsActive && !administracija.active)
+            if (productsIsActive && !products.active)
             {
-                proizvodi.SetActive(true);
-                curentWindow = proizvodi;
-            }
-            else
-            {
-                proizvodi.SetActive(false);
-            }
-            if (unosiIsActive && !unosi.active)
-            {
-                unosi.SetActive(true);
-                curentWindow = unosi;
+                products.SetActive(true);
+                curentWindow = products;
             }
             else
             {
-                unosi.SetActive(false);
+                products.SetActive(false);
             }
-            if (proizvodEditIsActive && !proizvodEdit.active)
+            if (inputsIsActive && !inputs.active)
             {
-                proizvodEdit.SetActive(true);
-                curentWindow = proizvodEdit;
-            }
-            else
-            {
-                proizvodEdit.SetActive(false);
-            }
-            if (dodajProizvodIsActive && !dodajProizvod.active)
-            {
-                dodajProizvod.SetActive(true);
-                curentWindow = dodajProizvod;
+                inputs.SetActive(true);
+                curentWindow = inputs;
             }
             else
             {
-                dodajProizvod.SetActive(false);
+                inputs.SetActive(false);
             }
-            if (unosExcelIsActive && !unosExcel.active)
+            if (productEditIsActive && !productEdit.active)
             {
-                unosExcel.SetActive(true);
-                curentWindow = unosExcel;
-            }
-            else
-            {
-                unosExcel.SetActive(false);
-            }
-            if (pregledUnosaIsActive && !pregledUnosa.active)
-            {
-                pregledUnosa.SetActive(true);
-                curentWindow = pregledUnosa;
+                productEdit.SetActive(true);
+                curentWindow = productEdit;
             }
             else
             {
-                pregledUnosa.SetActive(false);
+                productEdit.SetActive(false);
+            }
+            if (addProductIsActive && !addProduct.active)
+            {
+                addProduct.SetActive(true);
+                curentWindow = addProduct;
+            }
+            else
+            {
+                addProduct.SetActive(false);
+            }
+            if (inputExcelIsActive && !inputExcel.active)
+            {
+                inputExcel.SetActive(true);
+                curentWindow = inputExcel;
+            }
+            else
+            {
+                inputExcel.SetActive(false);
+            }
+            if (inputReviewIsActive && !inputReview.active)
+            {
+                inputReview.SetActive(true);
+                curentWindow = inputReview;
+            }
+            else
+            {
+                inputReview.SetActive(false);
             }
             setAllFalse();
-            windowCanged = false;
-
-            
+            windowCanged = false;           
         }
+
+        // Navigation back
+
         if (Input.GetKeyDown("escape"))
         {
             getBack();
@@ -197,12 +197,12 @@ public class Navigation : MonoBehaviour
     void setAllFalse()
     {
         mainMenuIsActive = false;
-        administracijaIsActive = false;
-        proizvodiIsActive = false;
-        unosiIsActive = false;
-        proizvodEditIsActive = false;
-        dodajProizvodIsActive = false;
-        unosExcelIsActive = false;
-        pregledUnosaIsActive = false;
+        administrationIsActive = false;
+        productsIsActive = false;
+        inputsIsActive = false;
+        productEditIsActive = false;
+        addProductIsActive = false;
+        inputExcelIsActive = false;
+        inputReviewIsActive = false;
     }
 }

@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
 
 public class LineScript : MonoBehaviour
 {
@@ -12,17 +10,7 @@ public class LineScript : MonoBehaviour
     public string timeStr { get; set; }
     public string nameStr { get; set; }
     public string amoutStr { get; set; }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void deleteThis()
     {
         GameObject.Destroy(this.gameObject);

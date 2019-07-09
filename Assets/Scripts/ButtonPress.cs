@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class ButtonPress : MonoBehaviour
 {
-    public string proizvodName { get; set; }
-    public GameObject proizvodEdit;
+    public string productName { get; set; }
+    public GameObject productdEdit;
 
     private GameObject canvas;
 
     private void Start()
     {
         canvas = GameObject.FindWithTag("Canvas");
-        proizvodEdit = canvas.GetComponent<Navigation>().proizvodEdit;  
+        productdEdit = canvas.GetComponent<Navigation>().productEdit;  
     }
 
     public void ButtonCLicked()
     {
-        proizvodEdit.GetComponent<ProizvodEdit>().idProizvoda = proizvodName.Replace(" ", string.Empty);
-        canvas.GetComponent<Navigation>().proizvodEditIsActive = true;
+        productdEdit.GetComponent<ProductEdit>().idProduct = productName.Replace(" ", string.Empty);
+        canvas.GetComponent<Navigation>().productEditIsActive = true;
         canvas.GetComponent<Navigation>().windowCanged = true;
     }
 }

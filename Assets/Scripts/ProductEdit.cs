@@ -7,18 +7,18 @@ using System.Xml.Linq;
 using UnityEngine.Networking;
 using System.IO;
 
-public class ProizvodEdit : MonoBehaviour
+public class ProductEdit : MonoBehaviour
 {
-    public string idProizvoda { get; set; }
+    public string idProduct { get; set; }
 
     private XmlDocument xmlDoc;
     private XmlElement elem;
     private string xmlPath;
 
     private GameObject canvas;
-    public GameObject imeInput;
-    public GameObject cijenaInput;
-    public GameObject tezinInput;
+    public GameObject nameInput;
+    public GameObject priceInput;
+    public GameObject weightInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,24 +39,24 @@ public class ProizvodEdit : MonoBehaviour
 
         foreach (XmlElement elem in xmlDoc.DocumentElement)
         {
-            if (elem.GetAttribute("id") == idProizvoda)
+            if (elem.GetAttribute("id") == idProduct)
             {
                 foreach (XmlAttribute atr in elem.Attributes)
                 {
                     if (atr.Name == "Ime")
                     {
-                        imeInput.transform.Find("TextMeshPro Text").GetComponent<TextMeshProUGUI>().text = atr.Value;
-                        imeInput.GetComponentInChildren<TextMeshProUGUI>().text = "Promjeni " + atr.Name;
+                        nameInput.transform.Find("TextMeshPro Text").GetComponent<TextMeshProUGUI>().text = atr.Value;
+                        nameInput.GetComponentInChildren<TextMeshProUGUI>().text = "Promjeni " + atr.Name;
                     }
                     if (atr.Name == "Cijena")
                     {
-                        cijenaInput.transform.Find("TextMeshPro Text").GetComponent<TextMeshProUGUI>().text = atr.Value;
-                        cijenaInput.GetComponentInChildren<TextMeshProUGUI>().text = "Promjeni " + atr.Name;
+                        priceInput.transform.Find("TextMeshPro Text").GetComponent<TextMeshProUGUI>().text = atr.Value;
+                        priceInput.GetComponentInChildren<TextMeshProUGUI>().text = "Promjeni " + atr.Name;
                     }
                     if (atr.Name == "Tezina")
                     {
-                        tezinInput.transform.Find("TextMeshPro Text").GetComponent<TextMeshProUGUI>().text = atr.Value;
-                        tezinInput.GetComponentInChildren<TextMeshProUGUI>().text = "Promjeni " + atr.Name;
+                        weightInput.transform.Find("TextMeshPro Text").GetComponent<TextMeshProUGUI>().text = atr.Value;
+                        weightInput.GetComponentInChildren<TextMeshProUGUI>().text = "Promjeni " + atr.Name;
                     }
                 }
             }
@@ -64,25 +64,25 @@ public class ProizvodEdit : MonoBehaviour
     }
     private void OnDisable()
     {
-        imeInput.GetComponentInChildren<TMP_InputField>().text = "";
-        cijenaInput.GetComponentInChildren<TMP_InputField>().text = "";
-        tezinInput.GetComponentInChildren<TMP_InputField>().text = "";
+        nameInput.GetComponentInChildren<TMP_InputField>().text = "";
+        priceInput.GetComponentInChildren<TMP_InputField>().text = "";
+        weightInput.GetComponentInChildren<TMP_InputField>().text = "";
     }
     public void onSave()
     {
-        elem =  xmlDoc.GetElementById(idProizvoda);
-        if (imeInput.GetComponentInChildren<TMP_InputField>().text.Length > 1)
+        elem =  xmlDoc.GetElementById(idProduct);
+        if (nameInput.GetComponentInChildren<TMP_InputField>().text.Length > 1)
         {
-            elem.SetAttribute("id", imeInput.GetComponentInChildren<TMP_InputField>().text.Replace(" ", string.Empty));          //error
-            elem.SetAttribute("Ime", imeInput.GetComponentInChildren<TMP_InputField>().text);
+            elem.SetAttribute("id", nameInput.GetComponentInChildren<TMP_InputField>().text.Replace(" ", string.Empty));          //error
+            elem.SetAttribute("Ime", nameInput.GetComponentInChildren<TMP_InputField>().text);
         }
-        if (cijenaInput.GetComponentInChildren<TMP_InputField>().text.Length > 0)
+        if (priceInput.GetComponentInChildren<TMP_InputField>().text.Length > 0)
         {
-            elem.SetAttribute("Cijena", PriceConverter(cijenaInput.GetComponentInChildren<TMP_InputField>().text));
+            elem.SetAttribute("Cijena", PriceConverter(priceInput.GetComponentInChildren<TMP_InputField>().text));
         }
-        if (tezinInput.GetComponentInChildren<TMP_InputField>().text.Length > 0)
+        if (weightInput.GetComponentInChildren<TMP_InputField>().text.Length > 0)
         {
-            elem.SetAttribute("Tezina", tezinInput.GetComponentInChildren<TMP_InputField>().text + "g");
+            elem.SetAttribute("Tezina", weightInput.GetComponentInChildren<TMP_InputField>().text + "g");
         }
 #if UNITY_STANDALONE
         xmlDoc.Save(Application.dataPath + "/StreamingAssets/Proizvodi.xml");
@@ -93,7 +93,7 @@ public class ProizvodEdit : MonoBehaviour
     }
     public void onDeletePress()
     {
-        xmlDoc.GetElementById("Proizvodi").RemoveChild(xmlDoc.GetElementById(idProizvoda));               //error
+        xmlDoc.GetElementById("Proizvodi").RemoveChild(xmlDoc.GetElementById(idProduct));               //error
 #if UNITY_STANDALONE
         xmlDoc.Save(Application.dataPath + "/StreamingAssets/Proizvodi.xml");
 #endif

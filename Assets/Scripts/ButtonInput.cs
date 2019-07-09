@@ -2,7 +2,7 @@
 using TMPro;
 
 
-public class ButtonUnoos : MonoBehaviour
+public class ButtonInput : MonoBehaviour
 {
     public GameObject unosExcel;
     public string proizvodName { get; set; }
@@ -12,13 +12,13 @@ public class ButtonUnoos : MonoBehaviour
     void Start()
     {
         canvas = GameObject.FindWithTag("Canvas");
-        unosExcel = canvas.GetComponent<Navigation>().unosExcel;
+        unosExcel = canvas.GetComponent<Navigation>().inputExcel;
     }
    
     public void onClickedButton()
     {
-        unosExcel.GetComponent<UnosiExcel>().IdProizvoda = proizvodName.Replace(" ",string.Empty);
-        canvas.GetComponent<Navigation>().unosExcelIsActive = true;
+        unosExcel.GetComponent<InputsExcel>().IdProduct = proizvodName.Replace(" ",string.Empty);
+        canvas.GetComponent<Navigation>().inputExcelIsActive = true;
         canvas.GetComponent<Navigation>().windowCanged = true;
     }
 }

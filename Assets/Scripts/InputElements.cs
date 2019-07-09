@@ -6,10 +6,10 @@ using System.Text;
 using System.Xml;
 using TMPro;
 
-public class ProizvodiEditor : MonoBehaviour
+public class InputElements : MonoBehaviour
 {
-    private XmlDocument xmlDoc;
-    public GameObject proizvodButton;
+    public XmlDocument xmlDoc;
+    public GameObject productButton;
     public GameObject containerButtons;
 
     private void OnEnable()
@@ -28,20 +28,17 @@ public class ProizvodiEditor : MonoBehaviour
     {
         foreach (Transform child in containerButtons.transform)
         {
-            if(child.tag == "ButtonEdit")
-            {
-                GameObject.Destroy(child.gameObject);
-            }
+            GameObject.Destroy(child.gameObject);
         }
-    }
+    } 
 
     private void proizvodLister(XmlDocument xmlDoc)
     {
         foreach(XmlElement proizvod in xmlDoc.DocumentElement)
         {
-            GameObject butt = Instantiate(proizvodButton, containerButtons.transform) as GameObject;
+            GameObject butt = Instantiate(productButton, containerButtons.transform) as GameObject;
             butt.GetComponentInChildren<TextMeshProUGUI>().SetText(proizvod.GetAttribute("Ime"));
-            butt.GetComponent<ButtonPress>().proizvodName = proizvod.GetAttribute("Ime");
+            butt.GetComponent<ButtonInput>().proizvodName = proizvod.GetAttribute("Ime");
         }
         
      }
