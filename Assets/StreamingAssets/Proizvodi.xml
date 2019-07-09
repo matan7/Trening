@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Proizvodi[
+  <!ELEMENT Proizvodi ANY>
+  <!ELEMENT Proizvod ANY>
+  <!ATTLIST Proizvodi id ID #REQUIRED>
+  <!ATTLIST Proizvod id ID #REQUIRED>
+  
+]>
+<Proizvodi id="Proizvodi">
+  <Proizvod id="Kifla" Ime="Kifla" Cijena="2.00" Tezina="100g" />
+</Proizvodi>
